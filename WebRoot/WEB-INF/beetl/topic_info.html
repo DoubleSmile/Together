@@ -1,0 +1,108 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <%if(topic.groups.mode=='public'){%>
+        <li><a href="${base}/public/${topic.groups.id}">${topic.groups.name}</a></li>
+        <%}else if(topic.groups.mode=='user'){%>
+        <li><a href="${base}/user-groups/listTopic/${topic.groups.id}">${topic.groups.name}</a></li>
+        <%}else{%>
+        <li><a href="${base}/groups/">组</a></li>
+        <%}%>
+        <li class="active">${topic.title!}</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">查看帖子</span></h2>
+
+    <%if(topic.isTeacher==1){%>
+    <div class="panel panel-danger">
+        <div class="panel-heading">${topic.title!}</div>
+        <div class="panel-body">
+            <p>${topic.content!}</p>
+            <span class="meta pull-right"><span class="glyphicon glyphicon-calendar"></span> <me>
+                ${printTime(topic.time)}
+            </me>  <span class="glyphicon glyphicon-user"></span> <me><a
+                    href="${base}/user/getInfo/${topic.user.id!}">${topic.user.name}</a></me>
+                <%if(session.user!=null){%>
+                    <%if(session.user.isTeacher==1){%>
+                    <a href="${base}/topic/deleteTopic/${topic.id!}" role="button" class="btn btn-danger">删除</a>
+                    <%}%>
+                <%}%>
+            </span>
+        </div>
+    </div>
+    <%}else{%>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">${topic.title!}</div>
+        <div class="panel-body">
+            <p>${topic.content!}</p>
+            <span class="meta pull-right"><span class="glyphicon glyphicon-calendar"></span> <me>
+                ${printTime(topic.time)}
+            </me>  <span
+                    class="glyphicon glyphicon-user"></span> <me><a
+                    href="${base}/user/getInfo/${topic.user.id!}">${topic.user.name}</a></me>
+                <%if(session.user!=null){%>
+                    <%if(session.user.isTeacher==1){%>
+                    <a href="${base}/topic/deleteTopic/${topic.id!}" role="button" class="btn btn-danger">删除</a>
+                    <%}%>
+                <%}%>
+                    </span>
+        </div>
+    </div>
+
+    <%}%>
+
+    <%for(post in page.list!){%>
+
+    <ul class="messages">
+
+        <li class="well">
+            <p class="message">
+                ${post.content}
+            </p>
+            <span class="meta">回复时间: <em>${printTime(post.time)}</em> by <em><a
+                    href="${base}/user/getInfo/${post.user.id!}">${post.user.name}</a></em>
+                <%if(session.user!=null){%>
+                <%if(session.user.isTeacher==1){%>
+                <a href="${base}/post/deletePost/${topic.id!}-${post.id}" role="button" class="btn btn-danger">删除</a>
+                <%}%>
+                <%}%>
+            </span>
+        </li>
+    </ul>
+
+    <%}%>
+
+    <%if(session.user!=null){%>
+
+    <div class="row">
+        <a class="toggle-link" href="#message-reply"><i class="icon-plus"></i>回复</a>
+    </div>
+
+    <form id="message-reply" action="${base}/post/newPost/${topic.id!}-${page.pageNumber}" method="post"
+          class="form-horizontal hidden">
+        <fieldset>
+            <legend>Reply</legend>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">内容</span>
+                <textarea rows="3" name="content" class="form-control" aria-describedby="basic-addon1"></textarea>
+            </div>
+            <div class="docs-header">
+                <button type="submit" class="btn btn-primary">发送</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <%}%>
+    <div class="row">
+        <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+        {}%>
+    </div>
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

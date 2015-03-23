@@ -1,0 +1,75 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li>我的消息</li>
+        <li class="active">私信</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">消息内容</span></h2>
+
+    <ul class="messages">
+        <li class="well">
+            <p class="message">
+                ${message.content!}
+            </p>
+            <span class="meta">时间: <em>${printTime(message.time)}</em> by <%if(message.user.id==session.user.id){%>
+                <em>我</em>
+                <%}else{%>
+                <a href="${base}/user/getInfo/${message.user.id!}">${message.user.name!}</a>
+                <%}%></span>
+
+            <%for(msg in page.list!){%>
+            <%if(msg.user.id==session.user.id){%>
+            <ul class="messages">
+                <li class="well">
+                    <p class="message">
+                        ${msg.content!}
+                    </p>
+                    <span class="meta">时间: <em>${printTime(msg.time)}</em> by <em>我</em></span>
+                </li>
+            </ul>
+            <%}else{%>
+            <ul class="messages">
+                <li class="well">
+                    <p class="message text-primary">
+                        ${msg.content!}
+                    </p>
+                    <span class="meta">时间: <em>${printTime(msg.time)}</em> by <a href="">${msg.user.name!}</a></span>
+                </li>
+            </ul>
+            <%}}%>
+        </li>
+
+        <a class="toggle-link" href="#message-reply"><i class="icon-plus"></i>回复</a>
+
+        <form id="message-reply" action="${base}/msg/newReturn" method="post"
+              class="form-horizontal hidden">
+            <fieldset>
+                <legend>Reply</legend>
+                <div class="input-group">
+                    <span class="input-group-addon">内容</span>
+                    <textarea name="content" rows="3" class="form-control" aria-describedby="basic-addon1"></textarea>
+                </div>
+                <input type="hidden" name="messageID" value="${message.id}">
+
+                <div class="docs-header">
+                    <button type="submit" class="btn btn-primary">发送</button>
+
+                </div>
+            </fieldset>
+
+        </form>
+
+    </ul>
+
+    <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+    {}%>
+
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

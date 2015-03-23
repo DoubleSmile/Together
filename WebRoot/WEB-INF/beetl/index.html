@@ -1,0 +1,170 @@
+<%layout("/common/layout.html"){%>
+
+<%include("/common/login_alert.html"){}%>
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-xs-8">
+            <h2>热门贴</h2>
+
+            <div class="list-group">
+
+                <%for(topic in list){%>
+
+                <a href="${base}/post/${topic.id}" class="list-group-item">
+                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-list">   </span>   ${topic.title}</h4>
+
+                    <p class="list-group-item-text text-primary">作者: ${topic.user.name}</p>
+                </a>
+
+                <%}%>
+            </div>
+
+        </div>
+
+        <div class="col-xs-4">
+            <h2>新闻</h2>
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                               aria-controls="collapseOne">
+                                <h5>${news_list[0].title}</h5>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+                        <div class="panel-body">${news_list[0].content}<a href="${news_list[0].href}">查看更多</a></div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                               aria-expanded="false" aria-controls="collapseTwo">
+                                <h5>${news_list[1].title}</h5>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">${news_list[1].content}<a href="${news_list[1].href}">查看更多</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                               aria-expanded="false" aria-controls="collapseThree">
+                                <h5>${news_list[2].title}</h5>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingThree">
+                        <div class="panel-body">${news_list[2].content}<a href="${news_list[2].href}">查看更多</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row docs-header">
+    <h2>导航</h2>
+</div>
+
+<div class="row">
+
+    <div class="col-xs-12">
+
+        <div class="col-xs-3">
+            <a href="#" class="thumbnail site-href">
+                <img src="img/4.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>查询校网流量</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-3">
+            <a href="http://www.xidian.edu.cn/" class="thumbnail site-href">
+                <img src="img/6.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>学校主页</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-3">
+            <a href="http://shiningacg.jimdo.com" class="thumbnail site-href">
+                <img src="img/8.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>Shining动漫社</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-3">
+            <a href="http://jwc.xidian.edu.cn/" class="thumbnail site-href">
+                <img src="img/2.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>教务处</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-3">
+            <a href="http://r8s.xidian.edu.cn/" class="thumbnail site-href">
+                <img src="img/7.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>物理实验选课</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-3">
+            <a href="http://r8s.xidian.edu.cn/" class="thumbnail site-href">
+                <img src="img/3.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>睿思</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3">
+            <a href="http://bbs.xidian.edu.cn/" class="thumbnail site-href">
+                <img src="img/1.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>雁塔晨钟</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-3">
+            <a href="#" class="thumbnail site-href">
+                <img src="img/5.png" alt=""/>
+
+                <div class="caption index-block-title">
+                    <h5>西电开源</h5>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+<%}%>

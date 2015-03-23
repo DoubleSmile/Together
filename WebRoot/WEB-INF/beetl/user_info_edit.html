@@ -1,0 +1,43 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">我的信息</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">个人信息(编辑)</span></h2>
+
+    <div class="jumbotron">
+
+
+        <div class="row">
+
+            <form method="post" action="${base}/user/update">
+                <div class="form-group">
+                    <label for="id">名称:</label>
+                    <input type="text" name="name" value="${session.user.name!}" class="form-control" id="id"
+                           placeholder="你的账号">
+                </div>
+                <div class="form-group">
+                    <label for="pw">签名:</label>
+                    <textarea name="feeling" rows="3" class="form-control" id="pw">${session.user.feeling!}</textarea>
+                </div>
+
+                <div class="row text-center">
+                    <button type="submit" class="btn btn-primary">修改</button>
+                </div>
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

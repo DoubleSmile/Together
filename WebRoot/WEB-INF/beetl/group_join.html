@@ -1,0 +1,59 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">组</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">加入组</span></h2>
+
+    <div class="col-md-8 col-md-offset-2 ">
+
+
+        <div class="list-group">
+
+            <%for(group in page.list!){%>
+
+            <a data-toggle="modal" data-target="#group_join" class="list-group-item alert-danger" onclick="a=${group.id};">
+                <h4 class="list-group-item-heading">${group.name}</h4>
+
+                <p class="list-group-item-text text-primary">${group.content}</p>
+            </a>
+
+            <%}%>
+
+        </div>
+
+        <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+        {}%>
+
+
+        <div class="modal fade" id="group_join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">请输入密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="password" id="pw" class="form-control" placeholder="组的密码"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="join" class="btn btn-success">确定</button>
+                        <a href="${base}/" id="btn-back" class="btn btn-primary">返回首页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

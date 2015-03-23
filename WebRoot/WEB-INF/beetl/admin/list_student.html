@@ -1,0 +1,30 @@
+<%layout("/common/layout_admin.html"){%>
+<div class="col-md-12">
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">后台管理</li>
+    </ol>
+
+
+    <h2>学生管理</h2>
+
+
+    <ul class="files zebra-list">
+        <%for(groups in page.list!){%>
+        <li><a href="${base}/admin/listGroupMember/${groups.id}">
+            <i class="title">${groups.name}</i>
+            <a class="pull-right" href="${base}/admin/deleteStudent/${groups.id}">删除</a>
+        </a>
+        </li>
+        <%}%>
+    </ul>
+
+    <div class="row text-center">
+        <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+        {}%>
+    </div>
+
+
+</div>
+</div>
+<%}%>

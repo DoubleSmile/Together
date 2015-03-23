@@ -1,0 +1,37 @@
+<%layout("/common/layout_admin.html"){%>
+<div class="col-md-12">
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">后台管理</li>
+    </ol>
+
+
+    <h2>组管理</h2>
+
+
+    <ul class="files zebra-list">
+        <%for(groups in page.list!){%>
+        <li><a href="${base}/admin/listGroupMember/${groups.id}">
+            <i class="title">${groups.name}</i>
+            <%if(groups.mode=='public'){%>
+            <i class="label label-info">公共区</i>
+            <%}%>
+            <a class="pull-right" href="${base}/admin/deleteGroup/${groups.id}">删除</a>
+        </a>
+        </li>
+        <%}%>
+    </ul>
+
+    <div class="row text-center">
+        <a href="${base}/admin/addG" role="button" class="btn btn-success">新组</a>
+    </div>
+
+
+    <div class="row text-center">
+        <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+        {}%>
+    </div>
+
+
+</div>
+<%}%>

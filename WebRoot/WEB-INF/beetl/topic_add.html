@@ -1,0 +1,50 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <%if(group.mode=='public'){%>
+        <li><a href="${base}/public/">公共区</a></li>
+        <%}else{%>
+        <li><a href="${base}/groups/${group.id}">组</a></li>
+        <%}%>
+        <li class="active">新帖子</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">发表新帖</span></h2>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">帖子</a></li>
+        <li role="presentation"><a href="${base}/groups/newVote/${group.id}">投票</a></li>
+    </ul>
+
+    <form method="post" action="${base}/topic/newTopic">
+
+        <div class="form-group">
+            <label for="title">标题</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="你的标题">
+        </div>
+
+        <div class="form-group">
+            <label for="content">内容</label>
+            <textarea class="form-control" rows="3" name="content" id="content" placeholder="你的内容"></textarea>
+        </div>
+
+        <input type="hidden" name="groupID" value="${group.id}">
+
+        <div class="row text-center">
+            <input type="submit" class="btn btn-primary" value="提交">
+            <%if(group.mode=='public'){%>
+            <a class="btn btn-primary" href="${base}/public/listTopic/${group.id}">取消</a>
+            <%}else{%>
+            <a class="btn btn-primary" href="${base}/groups/${group.id}">取消</a>
+            <%}%>
+        </div>
+    </form>
+
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

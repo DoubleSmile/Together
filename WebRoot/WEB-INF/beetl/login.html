@@ -1,0 +1,44 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+    <h2 class="docs-header"><span class="label label-info">登陆</span></h2>
+
+
+    <div class="col-md-6 col-md-offset-3">
+        <form action="${base}/user/login" method="post">
+            <%if(has(account_msg)){%>
+            <div class="form-group has-error">
+                <label for="id">账号:</label>
+                <input type="text" name="account" class="form-control" id="id" placeholder="${account_msg}">
+            </div>
+            <%}else{%>
+            <div class="form-group">
+                <label for="id">账号:</label>
+                <input type="text" name="account" class="form-control" id="id" placeholder="你的账号">
+            </div>
+            <%}%>
+
+            <%if(has(pw_msg)){%>
+            <div class="form-group has-error">
+                <label for="pw">密码:</label>
+                <input type="password" name="pw" class="form-control" id="pw" placeholder="${pw_msg}">
+            </div>
+            <%}else{%>
+            <div class="form-group">
+                <label for="pw">密码:</label>
+                <input type="password" name="pw" class="form-control" id="pw" placeholder="你的密码">
+            </div>
+            <%}%>
+
+            <div class="row text-center">
+                <input type="submit" class="btn btn-primary" value="登陆">
+                <a href="${base}/register" role="button" class="btn">没有账号?</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+<%}%>

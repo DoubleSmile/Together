@@ -1,0 +1,70 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <%if(group.mode=='public'){%>
+        <li><a href="${base}/public/">公共区</a></li>
+        <%}else{%>
+        <li><a href="${base}/groups/${group.id}">组</a></li>
+        <%}%>
+        <li class="active">新帖子</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">发表新帖</span></h2>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="${base}/groups/newTopic/${group.id}">帖子</a></li>
+        <li role="presentation" class="active"><a href="#">投票</a></li>
+    </ul>
+
+
+
+    <h2>新投票</h2>
+
+    <div class="row">
+        <div id="choice0" class=" col-md-7 col-md-offset-2"></div>
+    </div>
+
+
+    <div id="vote_form">
+        <div class="form-group">
+            <label for="vote_title">标题</label>
+            <input type="text" class="form-control" id="vote_title" placeholder="你的标题">
+        </div>
+        <div class="form-group">
+            <label for="vote_content">内容</label>
+            <textarea class="form-control" rows="3" id="vote_content" placeholder="你的内容"></textarea>
+        </div>
+
+        <input type="hidden" id="groupID" name="groupID" value="${group.id}">
+
+
+        <div class="row text-center">
+            <button id="add_vote" class="btn btn-primary">提交</button>
+            <button class="btn"><a href="${base}/groups/">取消</a></button>
+        </div>
+    </div>
+
+
+    <div id="choice_form" style="display: none">
+        <div class="form-group">
+            <label for="choice">描述</label>
+            <input type="text" class="form-control" id="choice" placeholder="要添加的选项">
+        </div>
+        <div class="row text-center">
+            <button id="add_choice" class="btn btn-primary">提交</button>
+            <%if(group.mode=='public'){%>
+            <a class="btn btn-primary" style="display: none" id="vote-success" href="${base}/public/listTopic/${group.id}">完成</a>
+            <%}else{%>
+            <a class="btn btn-primary" style="display: none" id="vote-success" href="${base}/groups/${group.id}">完成</a>
+            <%}%>
+
+        </div>
+    </div>
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

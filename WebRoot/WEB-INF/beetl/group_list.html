@@ -1,0 +1,37 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">个人组</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">选择组</span></h2>
+
+    <div class="col-md-8 col-md-offset-2 ">
+
+        <div class="list-group">
+
+            <%for(group in list!){%>
+
+            <a href="${base}/groups/listForTeacher/${group.id}" class="list-group-item">
+                <h4 class="list-group-item-heading">${group.name}</h4>
+
+                <p class="list-group-item-text text-primary">${group.content}</p>
+            </a>
+
+            <%}%>
+
+        </div>
+
+        <div class="row text-center">
+            <a href="${base}/groups/newTeacherGroup" role="button" class="btn btn-success">新组</a>
+        </div>
+
+    </div>
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

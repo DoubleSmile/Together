@@ -1,0 +1,40 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">我的消息</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">我的消息</span></h2>
+
+    <div class="list-group">
+        <%for(message in page.list!){%>
+        <%if(message.user.id==session.user.id){
+        if(message.readA==1){%>
+        <a href="${base}/msg/info/${message.id}" class="list-group-item">我发送的
+            <p href="#" class="text-success pull-right">${message.toUser.name!}</p></a>
+        <%}else{%>
+        <a href="${base}/msg/info/${message.id}" class="list-group-item list-group-item-info">我发送的
+            <p href="#" class="text-success pull-right">${message.toUser.name!}</p></a>
+        <%}}else{
+        if(message.readB==0){%>
+        <a href="${base}/msg/info/${message.id}" class="list-group-item list-group-item-info">私信(未读)<p
+                class="text-success pull-right">${message.user.name!}</p></a>
+        <%}else{%>
+        <a href="${base}/msg/info/${message.id}" class="list-group-item">私信(已读)<p class="text-success pull-right">
+            ${message.user.name!}</p></a>
+        <%}}%>
+
+        <%}%>
+    </div>
+
+    <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+    {}%>
+
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

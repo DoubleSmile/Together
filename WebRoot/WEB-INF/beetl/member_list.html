@@ -1,0 +1,62 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li><a href="${base}/groups">组</a></li>
+        <li class="active">成员列表</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">成员列表</span></h2>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">${group.name}</div>
+        <div class="panel-body text-center">
+            <p>指导教师</p>
+
+            <h3 class="text-primary">测试教师一</h3>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            <%for(member in page.list!){%>
+            <tr>
+                <td>${member.name}</td>
+                <td>${printTime(member.time)}</td>
+                <td>
+                    <%if(session.user.isTeacher==1){%>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
+                            操作 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="${base}/user/getInfo/${member.id}">私信</a></li>
+                            <li><a href="${base}/user/">删除</a></li>
+                        </ul>
+                    </div>
+                    <%}else{%>
+                    <a href="${base}/user/getInfo/${member.id}">
+                        <button class="btn btn-primary">信息</button>
+                    </a>
+                    <%}%>
+                </td>
+            </tr>
+            <%}%>
+        </table>
+
+        <%include("/common/paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!})
+        {}%>
+
+    </div>
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

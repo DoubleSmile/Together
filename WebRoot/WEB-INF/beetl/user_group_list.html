@@ -1,0 +1,42 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li class="active">个人组</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">我的组</span></h2>
+
+    <div class="row">
+            
+	        <%for(link in list!){%>
+	
+	         
+	        <div class=".col-md-6 .col-md-offset-3">
+	            <a href="${base}/user-groups/listTopic/${link.groups.id}">
+	                <div class="panel panel-default">
+	                    <div class="panel-body">
+	                        ${link.groups.name}
+	                    </div>
+	                    <div class="panel-footer">${link.groups.content}</div>
+	                </div>
+	            </a>
+	        </div>
+	
+	        <%}%>
+    </div>
+    
+    
+    <div class="row text-center">
+        <a href="${base}/user-groups/newGroup" role="button" class="btn btn-success">创建新组</a>
+        <a href="${base}/user-groups/selectGroup" role="button" class="btn btn-primary">加入新组</a>
+    </div>
+
+</div>
+
+
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

@@ -1,0 +1,78 @@
+<%layout("/common/layout.html"){%>
+<div class="col-md-8">
+
+
+    <ol class="breadcrumb">
+        <li><a href="${base}/">一起</a></li>
+        <li><a href="${base}/groups/">组</a></li>
+        <li class="active">${topic.title!}</li>
+    </ol>
+
+    <h2 class="docs-header"><span class="label label-info">查看帖子</span></h2>
+
+
+    <div class="panel panel-info">
+        <div class="panel-heading">投票:${topic.title!}</div>
+        <div class="panel-body">
+            <p>${topic.content!}</p>
+            <span class="meta pull-right"><span class="glyphicon glyphicon-calendar"></span> <me>
+                ${printTime(topic.time)}
+            </me>  <span class="glyphicon glyphicon-user"></span> <me><a
+                    href="${base}/user/getInfo/${topic.user.id!}">${topic.user.name}</a></me>
+                    <%if(session.user!=null && session.user.isTeacher==1){%>
+                    <a href="${base}/topic/deleteTopic/${topic.id!}" role="button" class="btn btn-danger">删除</a>
+                    <%}%>
+            </span>
+        </div>
+    </div>
+
+
+    <div class="jumbotron">
+
+        <%for(choice in list!){%>
+        <h4><b class="text-info">选项:${choice.title} </b>票数:${choice.count}</h4>
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                 aria-valuemin="0" aria-valuemax="100" style="width:${100*(choice.count/sum)}%;">
+                <span class="sr-only">${100*(choice.count/sum)}% Complete</span>
+            </div>
+        </div>
+        <%}%>
+
+    </div>
+    <%if(session.user!=null && canAdd==1){%>
+
+    <form method="post" action="${base}/post/vote/${topic.id}" class="text-center">
+        <%for(choice in list!){%>
+        <label>
+            <input type="radio" name="choice" value="${choice.id}"> ${choice.title!}
+        </label>
+        <%}%>
+
+
+        <div class="row">
+            <input class="btn btn-primary" type="submit" value="投票">
+        </div>
+
+    </form>
+
+    <%}else if(session.user!=null && canAdd==2){%>
+
+    <div class="row text-center">
+        <h3 class="alert-info">已投票</h3>
+    </div>
+    <%}else if(session.user!=null){%>
+
+    <div class="row text-center">
+        <h3 class="alert-info">投票已结束</h3>
+    </div>
+
+    <%}%>
+
+
+</div>
+
+<%include("/common/side_bar.html"){}%>
+
+<%}%>

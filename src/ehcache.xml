@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="true" monitoring="autodetect" dynamicConfig="false">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+            maxElementsInMemory="3600"
+            eternal="false"
+            timeToIdleSeconds="10800"
+            timeToLiveSeconds="10800"
+            overflowToDisk="false"/>
+
+    <cache name="choice"
+           maxElementsInMemory="600"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="choice_list"
+           maxElementsInMemory="300"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="group_list"
+           maxElementsInMemory="1"
+           eternal="true"
+           overflowToDisk="false"/>
+
+    <cache name="public_list"
+           maxElementsInMemory="1"
+           eternal="true"
+           overflowToDisk="false"/>
+
+
+    <cache name="index_topic"
+           maxElementsInMemory="1"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+
+    <cache name="news"
+           maxElementsInMemory="1"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="message_number"
+           maxElementsInMemory="400"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="message_list"
+           maxElementsInMemory="400"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="message"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="post"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="return_msg"
+           maxElementsInMemory="400"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="return_msg_list"
+           maxElementsInMemory="400"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+
+    <cache name="group"
+           maxElementsInMemory="800"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="topic"
+           maxElementsInMemory="800"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="user"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <cache name="link"
+           maxElementsInMemory="2000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"/>
+
+    <cache name="user_list"
+           maxElementsInMemory="200"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+
+</ehcache>
