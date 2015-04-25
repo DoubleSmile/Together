@@ -7,7 +7,9 @@ body {
 }
 
 .docs-header {
-    padding: 10px 10px;
+    padding: 15px 10px;
+    color:rgba(41, 129, 183, 0.91);
+    border-bottom:1px solid #747474
 }
 
 .alert_title {

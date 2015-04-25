@@ -15,6 +15,7 @@ public class Topic extends Model<Topic> {
 
     private static final String TOPIC_CACHE = "topic";
     private static final String INDEX_TOPIC_CACHE = "index_topic";
+    private static final String TOPIC_LIST_CACHE="topic_list";
 
     public Topic() {
         super(TOPIC_CACHE);
@@ -27,23 +28,23 @@ public class Topic extends Model<Topic> {
 
     //得到首页热点信息
     public List<Topic> getForIndex() {
-        List<Topic> list = dao.findByCache(INDEX_TOPIC_CACHE,0,"select id from topic where type = 'public' and mode != 'ban' order by topTime desc ,postCount desc limit 7");
+        List<Topic> list = dao.findByCache(INDEX_TOPIC_CACHE,0,"select id from topic where type = 'public' and mode != 'ban' order by topTime desc ,postCount desc limit 5");
         return loadModelList(list);
     }
 
 
     public Page<Topic> getForGroup(int groupID, int pageNumber) {
-        Page<Topic> page = dao.paginateByCache("group-" + groupID, groupID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' order by isTeacher desc, topTime desc ,postCount desc", groupID);
+        Page<Topic> page = dao.paginateByCache(TOPIC_LIST_CACHE, groupID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' order by isTeacher desc, topTime desc ,postCount desc", groupID);
         return loadModelPage(page);
     }
 
     public Page<Topic> getTeacher(int groupID, int pageNumber) {
-        Page<Topic> page = dao.paginateByCache("group-" + groupID + "-teacher", groupID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' and isTeacher=1 order by topTime desc", groupID);
+        Page<Topic> page = dao.paginateByCache(TOPIC_LIST_CACHE, groupID + "-" + pageNumber+"-teacher", pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' and isTeacher=1 order by topTime desc", groupID);
         return loadModelPage(page);
     }
 
     public Page<Topic> getHot(int groupID, int pageNumber) {
-        Page<Topic> page = dao.paginateByCache("group-" + groupID + "-hot", groupID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' order by postCount desc", groupID);
+        Page<Topic> page = dao.paginateByCache(TOPIC_LIST_CACHE, groupID + "-" + pageNumber+"-hot", pageNumber, Cfg.PAGE_SIZE, "select id", "from topic where groupID = ? and mode != 'ban' order by postCount desc", groupID);
         return loadModelPage(page);
     }
 
@@ -112,8 +113,8 @@ public class Topic extends Model<Topic> {
 
 
     public void deleteTopic() {
-        removeCache();
         this.delete();
+        removeCache();
     }
 
     /* getter */
@@ -126,8 +127,9 @@ public class Topic extends Model<Topic> {
     }
 
     public void removeCache() {
+        CacheKit.removeAll(TOPIC_CACHE);
         CacheKit.removeAll(INDEX_TOPIC_CACHE);
-        CacheKit.removeAll("group-" + this.getInt("groupID"));
+        CacheKit.removeAll(TOPIC_LIST_CACHE);
     }
 
 

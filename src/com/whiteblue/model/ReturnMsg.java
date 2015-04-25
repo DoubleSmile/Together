@@ -30,11 +30,16 @@ public class ReturnMsg extends Model<ReturnMsg> {
         this.set("messageID", messageID);
         this.set("time", new Date());
         this.save();
-        CacheKit.removeAll(RETURN_MSG_LIST_CACHE);
+        removeCache();
     }
 
     public User getUser() {
         return User.dao.getById(this.getInt("userID"));
+    }
+
+    public void removeCache(){
+        CacheKit.removeAll(RETURN_MSG_CACHE);
+        CacheKit.removeAll(RETURN_MSG_LIST_CACHE);
     }
 
 }

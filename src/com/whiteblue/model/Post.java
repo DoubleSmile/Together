@@ -13,6 +13,7 @@ public class Post extends Model<Post> {
     public static final Post dao = new Post();
 
     public static final String POST_CACHE = "post";
+    public static final String POST_LIST_CACHE="post_list";
 
     public Post() {
         super(POST_CACHE);
@@ -20,7 +21,7 @@ public class Post extends Model<Post> {
 
 
     public Page<Post> getPostPage(int pageNumber, int topicID) {
-        Page<Post> page = dao.paginateByCache("topic-" + topicID, topicID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from post where topicID = ?", topicID);
+        Page<Post> page = dao.paginateByCache(POST_LIST_CACHE, topicID + "-" + pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from post where topicID = ?", topicID);
         return loadModelPage(page);
     }
 
@@ -57,7 +58,8 @@ public class Post extends Model<Post> {
     }
 
     public void removeCache() {
-        CacheKit.removeAll("topic-" + this.getInt("topicID"));
+        CacheKit.removeAll(POST_CACHE);
+        CacheKit.removeAll(POST_LIST_CACHE);
     }
 
     public User getUser() {

@@ -4,13 +4,12 @@ import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.whiteblue.beetl.BeetlRenderFactory;
 import com.whiteblue.controller.*;
 import com.whiteblue.interceptor.GlobalInterceptor;
 import com.whiteblue.model.*;
-import org.beetl.core.GroupTemplate;
 
 /**
  * Created by WhiteBlue on 15/1/14.
@@ -37,7 +36,7 @@ public class Config extends JFinalConfig {
         me.add("/msg", MessageController.class).add("/admin", AdminController.class);
         me.add("/post", PostController.class);
         me.add("/public", PublicController.class);
-        me.add("/user-groups",UserGroupsController.class);
+        me.add("/user-groups", UserGroupsController.class);
     }
 
 
@@ -45,28 +44,21 @@ public class Config extends JFinalConfig {
      * 配置插件
      */
     public void configPlugin(Plugins me) {
-
         String jdbcUrl = PropKit.use("config.txt").get("SQL_URL");
         String user = PropKit.use("config.txt").get("SQL_USER");
         String password = PropKit.use("config.txt").get("SQL_PW");
 
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setUrl(jdbcUrl);
-        ds.setUser(user);
-        ds.setPassword(password);
-        ActiveRecordPlugin arp = new ActiveRecordPlugin(ds);
+        C3p0Plugin cp = new C3p0Plugin(jdbcUrl, user, password);
+        me.add(cp);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(cp);
         arp.setShowSql(false);
-
         me.add(new EhCachePlugin());
-
+        me.add(arp);
         arp.addMapping("post", Post.class).addMapping("user", User.class)
                 .addMapping("topic", Topic.class)
                 .addMapping("groups", Groups.class)
                 .addMapping("message", Message.class)
                 .addMapping("returnMsg", ReturnMsg.class).addMapping("choice", Choice.class).addMapping("link", Link.class);
-
-        me.add(arp);
-
     }
 
 

@@ -6,6 +6,7 @@ import com.whiteblue.config.Cfg;
 
 import java.util.Date;
 
+
 /**
  * Created by WhiteBlue on 15/1/15.
  */
@@ -54,14 +55,14 @@ public class User extends Model<User> {
     public void userUpdate(String name, String feeling) {
         this.set("name", name).set("feeling", feeling);
         this.update();
-        CacheKit.remove(USER_CACHE, this.getInt("id"));
+        removeCache();
     }
 
     //新用户设置组
     public void setGroup(int groupID) {
         this.set("groupID", groupID);
         this.update();
-        CacheKit.remove(USER_CACHE, this.getInt("id"));
+        removeCache();
     }
 
 
@@ -102,14 +103,19 @@ public class User extends Model<User> {
     //删除用户
     public void deleteUser() {
         this.delete();
-        CacheKit.remove(USER_CACHE, this.getInt("id"));
+        removeCache();
     }
 
     //清除组信息
     public void clearGroup() {
         this.set("groupID", null);
         this.update();
-        CacheKit.remove(USER_CACHE, this.getInt("id"));
+        removeCache();
+    }
+
+    public void removeCache(){
+        CacheKit.removeAll(USER_CACHE);
+        CacheKit.removeAll(USER_LIST_CACHE);
     }
 
 

@@ -1,5 +1,5 @@
-SQL_URL=jdbc:mysql://rdsrzj6bvrzj6bv.mysql.rds.aliyuncs.com:3306/rfd916w25fi258u4
-SQL_USER=rfd916w25fi258u4
-SQL_PW=00123456
-RSS=http://news.baidu.com/n?cmd=1&class=internet&tn=rss
+SQL_URL=jdbc:mysql://localhost:3306/yq?characterEncoding=utf8
+SQL_USER=root
+SQL_PW=
+RSS=http://tech.163.com/special/000944OI/headlines.xml
 PAGE_SIZE=7

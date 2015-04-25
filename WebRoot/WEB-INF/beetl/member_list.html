@@ -7,7 +7,7 @@
         <li class="active">成员列表</li>
     </ol>
 
-    <h2 class="docs-header"><span class="label label-info">成员列表</span></h2>
+    <h3 class="docs-header">成员列表</h3>
 
     <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -15,7 +15,11 @@
         <div class="panel-body text-center">
             <p>指导教师</p>
 
-            <h3 class="text-primary">测试教师一</h3>
+            <a href="${base}/user/getInfo/${creater.id}">
+                <h4>${creater.name}</h4>
+            </a>
+
+            <p>${creater.feeling}</p>
         </div>
 
         <table class="table">

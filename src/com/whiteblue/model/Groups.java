@@ -14,7 +14,7 @@ public class Groups extends Model<Groups> {
 
     private static final String GROUP_CACHE = "group";
     private static final String GROUP_LIST_CACHE = "group_list";
-    private static final String PUBLIC_GROUP_LIST_CACHE = "public_group_list";
+    private static final String USER_GROUP_LIST_CACHE = "user_group_list";
     private static final String PUBLIC_LIST_CACHE = "public_list";
 
 
@@ -36,7 +36,7 @@ public class Groups extends Model<Groups> {
         this.set("content",content);
         this.set("mode",mode);
         this.save();
-        CacheKit.removeAll(GROUP_LIST_CACHE);
+        removeCache();
     }
 
     public void newPublic(String name,String content) {
@@ -44,7 +44,7 @@ public class Groups extends Model<Groups> {
         this.set("content", content);
         this.set("mode","public");
         this.save();
-        CacheKit.removeAll(PUBLIC_LIST_CACHE);
+        removeCache();
     }
 
     public Page<Groups> listAll(int pageNumber) {
@@ -61,7 +61,7 @@ public class Groups extends Model<Groups> {
 
     //得到学生组列表
     public Page<Groups> listUserGroups(int pageNumber){
-        Page<Groups> page = dao.paginateByCache(PUBLIC_GROUP_LIST_CACHE, "list-public-"+pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from groups where mode = 'user'");
+        Page<Groups> page = dao.paginateByCache(USER_GROUP_LIST_CACHE, "list-user-"+pageNumber, pageNumber, Cfg.PAGE_SIZE, "select id", "from groups where mode = 'user'");
         return loadModelPage(page);
     }
 
@@ -92,9 +92,14 @@ public class Groups extends Model<Groups> {
 
     public void deleteGroup() {
         this.delete();
+        removeCache();
+    }
+
+    public void removeCache(){
+        CacheKit.removeAll(GROUP_CACHE);
         CacheKit.removeAll(GROUP_LIST_CACHE);
         CacheKit.removeAll(PUBLIC_LIST_CACHE);
-        CacheKit.removeAll(PUBLIC_GROUP_LIST_CACHE);
+        CacheKit.removeAll(USER_GROUP_LIST_CACHE);
     }
 
 }

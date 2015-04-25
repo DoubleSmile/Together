@@ -34,7 +34,7 @@ public class Choice extends Model<Choice> {
     public void addCount() {
         this.set("count", this.getInt("count") + 1);
         this.update();
-        CacheKit.remove(CHOICE_CACHE, this.getInt("id"));
+        removeCache();
     }
 
     //检查是否选项过多
@@ -47,7 +47,12 @@ public class Choice extends Model<Choice> {
         int count = this.getInt("count");
         this.set("count", this.getInt("count") + 1);
         this.update();
-        CacheKit.remove(CHOICE_CACHE, this.getInt("id"));
+        removeCache();
+    }
+
+    public void removeCache(){
+        CacheKit.removeAll(CHOICE_CACHE);
+        CacheKit.removeAll(CHOICE_LIST_CACHE);
     }
 
 

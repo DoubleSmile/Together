@@ -3,11 +3,10 @@
 
     <ol class="breadcrumb">
         <li><a href="${base}/">一起</a></li>
-        <li><a href="${base}/public">公共区</a></li>
-        <li class="active">${group.name}</li>
+        <li><a href="${base}/user-groups/listTopic/${group.id}">${group.name}</a></li>
     </ol>
 
-    <h2 class="docs-header"><span class="label label-info">帖子列表</span></h2>
+    <h3 class="docs-header">帖子列表</h3>
 
     <ul class="docs-header nav nav-tabs">
         <li role="presentation" class="active"><a href="#">默认</a></li>
@@ -56,8 +55,11 @@
                 <li><a href="#">公告</a></li>
             </ul>
         </div>
+        <a class="btn btn-danger" href="${base}/user-groups/clearLink/${group.id}">退出组</a>
+        <a class="btn btn-primary" href="${base}/user-groups/listMember/${group.id}">成员列表</a>
 
     </div>
+
 
     <%}%>
 

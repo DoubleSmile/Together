@@ -3,6 +3,7 @@
 
     <diskStore path="java.io.tmpdir"/>
 
+    <!--默认缓存-->
     <defaultCache
             maxElementsInMemory="3600"
             eternal="false"
@@ -10,6 +11,7 @@
             timeToLiveSeconds="10800"
             overflowToDisk="false"/>
 
+    <!--选项-->
     <cache name="choice"
            maxElementsInMemory="600"
            eternal="false"
@@ -17,6 +19,7 @@
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
+    <!--选项列表-->
     <cache name="choice_list"
            maxElementsInMemory="300"
            eternal="false"
@@ -24,75 +27,7 @@
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
-    <cache name="group_list"
-           maxElementsInMemory="1"
-           eternal="true"
-           overflowToDisk="false"/>
-
-    <cache name="public_list"
-           maxElementsInMemory="1"
-           eternal="true"
-           overflowToDisk="false"/>
-
-
-    <cache name="index_topic"
-           maxElementsInMemory="1"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-
-    <cache name="news"
-           maxElementsInMemory="1"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="message_number"
-           maxElementsInMemory="400"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="message_list"
-           maxElementsInMemory="400"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="message"
-           maxElementsInMemory="1000"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="post"
-           maxElementsInMemory="1000"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="return_msg"
-           maxElementsInMemory="400"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-    <cache name="return_msg_list"
-           maxElementsInMemory="400"
-           eternal="false"
-           timeToIdleSeconds="10800"
-           timeToLiveSeconds="10800"
-           overflowToDisk="false"/>
-
-
+    <!--组对象-->
     <cache name="group"
            maxElementsInMemory="800"
            eternal="false"
@@ -100,13 +35,116 @@
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
-    <cache name="topic"
-           maxElementsInMemory="800"
+    <!--组列表-->
+    <cache name="group_list"
+           maxElementsInMemory="100"
            eternal="false"
            timeToIdleSeconds="10800"
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
+    <!--学生组列表-->
+    <cache name="user_group_list"
+           maxElementsInMemory="50"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--公共话题列表-->
+    <cache name="public_list"
+           maxElementsInMemory="1"
+           eternal="true"
+           overflowToDisk="false"/>
+
+    <!--用户-组的关系-->
+    <cache name="link"
+           maxElementsInMemory="3000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--悄悄话-->
+    <cache name="message"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--悄悄话列表-->
+    <cache name="message_list"
+           maxElementsInMemory="2000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+
+    <!--每人私信数量的提示-->
+    <cache name="message_number"
+           maxElementsInMemory="1000"
+           eternal="true"
+           overflowToDisk="false"/>
+
+    <!--帖子的回复-->
+    <cache name="post"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--帖子的回复-->
+    <cache name="post_list"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--悄悄话回复-->
+    <cache name="return_msg"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--悄悄话回复列表-->
+    <cache name="return_msg_list"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--帖子-->
+    <cache name="topic"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="10800"
+           overflowToDisk="false"/>
+
+    <!--首页帖子推荐-->
+    <cache name="index_topic"
+           maxElementsInMemory="1"
+           eternal="false"
+           timeToIdleSeconds="30800"
+           timeToLiveSeconds="30800"
+           overflowToDisk="false"/>
+
+    <!--帖子列表-->
+    <cache name="topic_list"
+           maxElementsInMemory="2000"
+           eternal="false"
+           timeToIdleSeconds="20800"
+           timeToLiveSeconds="20800"
+           overflowToDisk="false"/>
+
+    <!--用户-->
     <cache name="user"
            maxElementsInMemory="1000"
            eternal="false"
@@ -114,19 +152,20 @@
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
-    <cache name="link"
-           maxElementsInMemory="2000"
-           eternal="false"
-           timeToIdleSeconds="300"
-           timeToLiveSeconds="300"
-           overflowToDisk="false"/>
-
+    <!--成员列表-->
     <cache name="user_list"
-           maxElementsInMemory="200"
+           maxElementsInMemory="100"
            eternal="false"
            timeToIdleSeconds="10800"
            timeToLiveSeconds="10800"
            overflowToDisk="false"/>
 
+    <!--新闻-->
+    <cache name="news"
+           maxElementsInMemory="1"
+           eternal="false"
+           timeToIdleSeconds="30800"
+           timeToLiveSeconds="30800"
+           overflowToDisk="false"/>
 
 </ehcache>

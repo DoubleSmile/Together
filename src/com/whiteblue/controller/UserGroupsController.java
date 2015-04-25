@@ -11,8 +11,6 @@ import com.whiteblue.model.Topic;
 import com.whiteblue.model.User;
 import com.whiteblue.validator.GroupsValidator;
 
-import java.util.List;
-
 /**
  * Created by WhiteBlue on 15/3/22.
  */
@@ -29,7 +27,6 @@ public class UserGroupsController extends Controller {
     public void listTopic() {
         int groupID = getParaToInt(0);
         User user = this.getSessionAttr("user");
-        List<Link> list = Link.dao.getList(user.getInt("id"));
         if (Link.dao.getByInfo(user.getInt("id"), groupID) != null) {
             Groups group = Groups.dao.getById(groupID);
             Page<Topic> page = Topic.dao.getForGroup(groupID, getParaToInt(1, 1));
@@ -84,6 +81,32 @@ public class UserGroupsController extends Controller {
             link.add(user.getInt("id"), group.getInt("id"));
             redirect("/user-groups/listTopic/" + group.getInt("id"));
         }
+    }
+
+    @Before(LoginInterceptor.class)
+    public void listMember() {
+        int groupID = getParaToInt(0, 1);
+        Groups group = Groups.dao.getById(groupID);
+        Page<Link> page = Link.dao.getUserList(group.getInt("id"), getParaToInt(1, 1));
+        setAttr("creater", User.dao.getById(group.getInt("userID")));
+        setAttr("page", page);
+        setAttr("group", group);
+        setAttr("actionUrl", "/user-groups/listMember/" + groupID + "-");
+        render("/user_group_member.html");
+
+    }
+
+    @Before(LoginInterceptor.class)
+    public void clearLink() {
+        if (getPara(0) != null) {
+            int userID = ((User) getSessionAttr("user")).getInt("id");
+            int groupID = getParaToInt(0);
+            if (Link.dao.isHave(userID, groupID)) {
+                Link link = Link.dao.getByInfo(userID, groupID);
+                link.remove();
+            }
+        }
+        redirect("/user-groups");
     }
 
 }

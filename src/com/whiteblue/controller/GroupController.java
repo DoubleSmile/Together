@@ -6,6 +6,7 @@ import com.whiteblue.interceptor.GroupInterceptor;
 import com.whiteblue.interceptor.LoginInterceptor;
 import com.whiteblue.interceptor.TeacherInterceptor;
 import com.whiteblue.model.Groups;
+import com.whiteblue.model.Link;
 import com.whiteblue.model.Topic;
 import com.whiteblue.model.User;
 
@@ -90,6 +91,7 @@ public class GroupController extends WbController {
         int groupID = getParaToInt(0, 1);
         Groups group = Groups.dao.getById(groupID);
         Page<User> page = User.dao.list(getParaToInt(0, 1), getParaToInt(1, 1));
+        setAttr("creater",User.dao.getById(group.getInt("userID")));
         setAttr("page", page);
         setAttr("group", group);
         setAttr("actionUrl", "/listMember/" + groupID + "-");
